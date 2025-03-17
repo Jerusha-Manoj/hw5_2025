@@ -1,0 +1,267 @@
+
+/* Mobile View */
+
+/* Animate the logo with keyframes. (Here is a keyframes reference.) It should start at a width of 25px and grow to 475px. It should also start with an opacity of 0 and end with an opacity of 1. The animation should take 5 seconds and only happen when the page is loaded. **You can complete this step later in the process - it won’t affect the larger views. */
+/*
+   - The logo should start at 25px width & opacity 0.
+   - It should animate to 475px width & opacity 1 in 5s.
+   - If prefers-reduced-motion is enabled, disable animation.
+   - Used @keyframes to create growLogo animation.
+   - Applied animation to #logo, with width transition.
+   - Added prefers-reduced-motion media query.
+*/
+
+@keyframes growLogo {
+    from {
+        width: 25px;
+        opacity: 0;
+    }
+
+    to {
+        width: 475px;
+        opacity: 1;
+    }
+}
+
+#logo {
+    animation: growLogo 5s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #logo {
+        animation: none;
+        width: 475px;
+        opacity: 1;
+    }
+}
+
+/* Edit the body element to use the Poppins font (using Google fonts) with serif as a backup. It should also use the image “concrete_seamless.png” as a background-image with a backup color of #f1f1f1. */
+
+/* 
+   - Set font to Poppins with a backup serif.
+   - Apply concrete_seamless.png as background.
+   - Use light gray as a backup background.
+   - Imported Poppins font.
+   - Used background-image and background-color.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+body {
+    font-family: 'Poppins', serif;
+    background-image: url('concrete_seamless.png');
+    background-color: #f1f1f1;
+}
+
+/* 
+   - The header should be centered.
+   - Navigation links should be stacked in mobile.
+   - Links should keep the same color when visited.
+   - Used flexbox to center header elements.
+   - Styled nav_links as a column in mobile view.
+   - Applied a:visited to maintain color.
+*/
+
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav_links {
+    display: flex;
+    flex-direction: column;
+}
+
+a:link,
+a:visited {
+    color: blue;
+}
+
+/*
+   - The card header should have a solid border.
+   - The top corners should be rounded.
+   - Cards should be flex containers.
+   - Cards should have a flexible width of 450px in mobile.
+   - Applied border styles & radius for top corners.
+   - Set flex properties to adjust size.
+*/
+
+.card>header {
+    background: #288088;
+    border: solid 2px #45ADAD;
+    padding: 20px 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.card {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 450px;
+    max-width: 450px;
+}
+
+/*
+   - Pricing section should center items.
+   - Cards should stack on mobile.
+   - Used flexbox with wrap & justify-center.
+*/
+
+.pricing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 
+   - Images should have a 10px solid border.
+   - Images should have a 10px margin.
+   - Images should be 300px wide.
+   - Applied border, margin, and width.
+   - Used flexbox for layout.
+*/
+
+.gallery img {
+    border: 10px solid #50C7C7;
+    margin: 10px;
+    width: 300px;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Desktop 900+ */
+
+/* 
+   - Header should use flexbox.
+   - Logo should align left.
+   - Nav links should align right.
+   - Header should remain sticky.
+   - Used space-between to push logo left & links right.
+   - Applied sticky positioning to keep header on screen.
+*/
+
+
+@media (min-width: 900px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .nav_links {
+        align-items: center;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-end;
+
+    }
+
+    body>header {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+}
+/*
+   - Cards should be next to each other.
+   - Each card should be 275px wide.
+   - Cards should have different heights.
+   - Used flexbox with row direction.
+   - Set flex-basis to 275px for uniform width.
+*/
+@media (min-width: 900px) {
+
+    .pricing {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 275px;
+    }
+
+}
+
+
+/* Print View */
+/* 
+   - Change font to Arial.
+   - Remove background image.
+   - Align pricing at the bottom.
+   - Hide the gallery.
+   - Add thumbs-up emoji after 2nd li.
+   - Move footer to new page.
+   - Applied Arial font.
+   - Removed background.
+   - Used flex-end for alignment.
+   - Hid gallery with display: none.
+   - Used nth-child(2) for emoji.
+   - Used page-break-before for footer (to match image)
+*/
+
+
+@media print {
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: none;
+    }
+
+    .nav_links {
+        display: flex;
+        flex-direction: row;
+        gap: 120px;
+    }
+
+    .pricing {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+        flex-grow: 1;
+    }
+
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 325px;
+        border: 2px solid #45ADDD;
+    }
+
+    .gallery {
+        display: none;
+    }
+
+    #gallery {
+        display: none;
+    }
+
+    .card ul li:nth-child(2)::after {
+        content: " 👍";
+    }
+
+    footer {
+        page-break-before: always;
+    }
+
+
+}
